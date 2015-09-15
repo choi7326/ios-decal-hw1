@@ -94,7 +94,7 @@ Q3 EXPLANATION
  * We need to specify the function as a class method (change: func -> class func)
  * It doesn't make sense that booleans are optional, booleans cannot be nil. (change Bool? -> Bool!)
  * Since the return value is not an optional we cannot return nil (change return nil -> return true)
- * The dictionary wasn't initialized properly (change var countLetters : [Character : Int] -> var countLetters = [Character : Int]())
+ * The dictionary wasn't initialized properly (change var countLetters : [Character : Int] -> var countLetters = \[Character : Int\]())
  */
 
 //: **Do not** change anything below.
