@@ -15,41 +15,45 @@ class Foo {
     var wordB : String!
     
     init (words: [String?]) {
-        wordA = words[0]?
-        wordB = words[1]?
+        wordA = words[0]!
+        wordB = words[1]!
     }
-    
-//: [EXPLAIN YOUR ANSWER TO Q1 HERE]
-    
+   
+/*:
+Q1 EXPLANATION
+ * We need to unwrap the String using ! since it is an optional (a ? doesn't unwrap an optional)
+ */
 
     
 //: ## Q2: Variable Types and Function Types
 //: Why does the compiler dislike the for loop? Also, what should we return?
     
-    func arePalindromes(words: [String]) -> Bool! {
+    class func arePalindromes(words: [String]) -> Bool! {
         let reversedWords = words.map() {String($0.characters.reverse())}
-        var numElements = words.count
+        let numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        for var i = 0; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
-        
-        return nil
+        return true
     }
     
-//: [EXPLAIN YOUR ANSWER TO Q2 HERE]
-    
-    
-    
+/*:
+Q2 EXPLANATION
+ * We need to specify the function as a class method (change: func -> class func)
+ * i needs to be a variable instead of a constant for us to be able to increment i (change: for let i... -> for var i)
+ * Since the return value is not an optional we cannot return nil, we can only return true or false (change return nil -> return true)
+ */
+
 //: ## Q3: More functions, and object initialization
 //: The method should be returning true or false -- what's wrong?
 //: Are we initializing the dictionary correctly?
-    func isAnagram(wordA: String, wordB: String) -> Bool? {
-        var countLetters : [Character : Int]
-        var lenA = wordA.characters.count
-        var lenB = wordB.characters.count
+    class func isAnagram(wordA: String, wordB: String) -> Bool! {
+        var countLetters = [Character : Int]()
+        let lenA = wordA.characters.count
+        let lenB = wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -75,18 +79,23 @@ class Foo {
             }
         }
         
-        for (letter, count) in countLetters {
+        for (_, count) in countLetters {
             if count != 0 {
                 return false
             }
         }
         
-        return nil
+        return true
     }
 }
 
-//: [EXPLAIN YOUR ANSWER TO Q3 HERE]
-
+/*:
+Q3 EXPLANATION
+ * We need to specify the function as a class method (change: func -> class func)
+ * It doesn't make sense that booleans are optional, booleans cannot be nil. (change Bool? -> Bool!)
+ * Since the return value is not an optional we cannot return nil (change return nil -> return true)
+ * The dictionary wasn't initialized properly (change var countLetters : [Character : Int] -> var countLetters = [Character : Int]())
+ */
 
 //: **Do not** change anything below.
 //: You should be able to call the methods as is.
